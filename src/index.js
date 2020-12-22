@@ -11,14 +11,19 @@ import { createFirestoreInstance, reduxFirestore, getFirestore } from 'redux-fir
 import { getFirebase, ReactReduxFirebaseProvider } from 'react-redux-firebase';
 import fbConfig from './config/fbConfig';
 import firebase from 'firebase/app';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 
-const store = createStore(rootReducer,
-  compose(
+
+
+const store = createStore(rootReducer, 
+  composeWithDevTools(
   applyMiddleware(thunk.withExtraArgument({getFirebase, getFirestore})),
   reduxFirestore(fbConfig),
+
   )
   );
+
 
   const rrfConfig = {
     userProfile: "users",
