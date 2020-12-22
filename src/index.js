@@ -7,9 +7,10 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import rootReducer from './store/reducers/rootReducer';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-import { reduxFirestore, getFirestore } from 'redux-firestore';
-import {  getFirebase } from 'react-redux-firebase';
+import { createFirestoreInstance, reduxFirestore, getFirestore } from 'redux-firestore';
+import { getFirebase, ReactReduxFirebaseProvider } from 'react-redux-firebase';
 import fbConfig from './config/fbConfig';
+import firebase from 'firebase/app';
 
 
 const store = createStore(rootReducer,
@@ -19,10 +20,22 @@ const store = createStore(rootReducer,
   )
   );
 
+  const rrfConfig = {
+    userProfile: "users",
+  };
+  const rrfProps = {
+    firebase,
+    config: rrfConfig,  // here you set the config property to rrfconfig which you added earlier.
+    dispatch: store.dispatch,
+    createFirestoreInstance,
+  };
+
 
 ReactDOM.render(
   <Provider store={store}>
+    <ReactReduxFirebaseProvider {...rrfProps}>
     <App />
+    </ReactReduxFirebaseProvider>
     </Provider>,
   document.getElementById('root')
 );

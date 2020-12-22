@@ -7,7 +7,7 @@ export const createProject = (project) => {
             authorFirstName: 'Justin',
             authorLastName: 'Oren',
             authorId: 12345,
-            createdAt: new Date()
+            createdAt: new Date().toDateString()
         }).then(() => {
             dispatch({type: 'CREATE_PROJECT', project: project})
         }).catch((err) => {
