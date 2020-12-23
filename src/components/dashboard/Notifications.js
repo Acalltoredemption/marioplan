@@ -1,13 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { firestoreConnect } from 'react-redux-firebase';
-import { compose } from 'redux';
+import moment from 'moment'
 
-const Notifications = (props) => {
-    if(props.eventlog){
-        const  events  = Object.values(props.eventlog);
-         console.log(events)
 
+const Notifications = ({events}) => {
+    
+        
          return (
             <div className="section">
                 <div className="card z-depth-0">
@@ -16,7 +13,11 @@ const Notifications = (props) => {
                         <ul className="notifications">
                 { events.map(event => {
                 return(
+                    <div key={event.createdAt.toDate()}>
                    <p className="pink-text">{event.notif}</p>
+                   <p className="grey-text">{moment(event.createdAt.toDate()).calendar()}</p>
+                   <br/>
+                   </div>
                 )
                })}
                         </ul>
@@ -24,29 +25,11 @@ const Notifications = (props) => {
                 </div>
             </div>
         )
-         } else {
-             return (
-                 <h4>Loading..</h4>
-             )
          }
 
  
 
 
 
-}
 
-
-const mapStateToProps = (state) => {
-    const eventlog = state.firestore.data.eventlog;
-    return {
-    eventlog: eventlog
-   }
-}
-
-export default compose(
-    connect(mapStateToProps),
-    firestoreConnect([
-        { collection: 'eventlog', limit: 5 }
-    ])
-)(Notifications);
+export default Notifications;

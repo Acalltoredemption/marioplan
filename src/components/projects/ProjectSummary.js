@@ -6,7 +6,7 @@ const ProjectSummary = ({project}) => {
         <div className="card-content grey-text text-darkened-3">
             <span className="card-title">{project.title}</span>
             <p>{project.authorFirstName} {project.authorLastName}</p>
-            <p className="grey-text">{project.createdAt.toDate().toString()}</p>
+            <p className="grey-text">{moment(project.createdAt.toDate()).calendar()}</p>
         </div>
     </div>
     )
