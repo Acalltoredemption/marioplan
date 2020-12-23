@@ -12,7 +12,7 @@ return (
                 <ProjectSummary project={project} />
                 </Link>
             )
-        })}
+        })} 
     </div>
 )
 }
