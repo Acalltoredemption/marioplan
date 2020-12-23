@@ -37,7 +37,11 @@ export const signUp = (newUser) => {
                 lastName: newUser.lastName,
                 initials: newUser.firstName[0] + newUser.lastName[0]
             })
-        }).then(() => {
+        }).then(() => firestore.collection('eventlog').add({
+            notif: newUser.firstName + ' has signed up!',
+            createdAt: new Date()
+        })
+        ).then(() => {
             dispatch({type: 'SIGNUP_SUCCESS'})
         }).catch(err => {
             dispatch({type: 'SIGNUP_ERROR', err})
