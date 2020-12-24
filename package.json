@@ -19,6 +19,7 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-firestore": "^0.14.0",
     "redux-thunk": "^2.3.0",
+    "vercel": "^21.0.1",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
